@@ -1,0 +1,6 @@
+@Sprintly_HostAddress = http://localhost:5001
+
+GET {{Sprintly_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
