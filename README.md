@@ -77,7 +77,7 @@ Sprintly/
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/sprintly.git
+git clone https://github.com/Ayush26102000/Sprintly.git
 cd sprintly
 ```
 
