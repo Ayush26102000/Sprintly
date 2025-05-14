@@ -39,8 +39,9 @@ namespace Sprintly.Infrastructure.Services
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                RoleId = (int)dto.Role,  
-                TenantId = Guid.NewGuid()
+                PasswordHash = dto.Password,
+                RoleId = (int)dto.Role,
+                TenantId = new Guid()
             };
 
             _context.Users.Add(user);

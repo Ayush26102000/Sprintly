@@ -12,8 +12,8 @@ using ProjectPilot.Infrastructure.Persistence;
 namespace Sprintly.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250510180456_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250514175017_ChangeRoleAndTenantIdToInt")]
+    partial class ChangeRoleAndTenantIdToInt
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace Sprintly.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("TenantId")
