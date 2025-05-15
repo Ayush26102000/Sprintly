@@ -39,10 +39,10 @@ namespace Sprintly.Infrastructure.Services
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = dto.Password,
                 RoleId = (int)dto.Role,
                 TenantId = new Guid()
             };
+            user.PasswordHash = _passwordHasher.HashPassword(user, dto.Password);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -60,7 +60,10 @@ namespace Sprintly.Infrastructure.Services
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
             if (result == Microsoft.AspNetCore.Identity.PasswordVerificationResult.Failed)
+            {
                 throw new Exception("Invalid credentials");
+            }
+ 
 
             return GenerateJwtToken(user);
         }
