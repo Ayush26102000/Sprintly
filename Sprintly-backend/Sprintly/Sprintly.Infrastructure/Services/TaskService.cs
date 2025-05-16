@@ -106,6 +106,50 @@ namespace Sprintly.Infrastructure.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+
+        public async Task<IEnumerable<TaskResponseDto>> FilterAndSortTasksAsync(
+     Guid userId,
+     TaskStatus? status = null,
+     Priority? priority = null,
+     string? sortBy = null,
+     bool descending = false)
+        {
+            var query = _context.Tasks
+                .Where(t => t.AssignedToUserId == userId)
+                .AsQueryable();
+
+            if (status.HasValue)
+                query = query.Where(t => t.Status == status.Value);
+
+            if (priority.HasValue)
+                query = query.Where(t => t.Priority == priority.Value);
+
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                query = sortBy.ToLower() switch
+                {
+                    "priority" => descending ? query.OrderByDescending(t => t.Priority) : query.OrderBy(t => t.Priority),
+                    "status" => descending ? query.OrderByDescending(t => t.Status) : query.OrderBy(t => t.Status),
+                    _ => query
+                };
+            }
+
+            return await query
+                .Select(t => new TaskResponseDto
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    Status = t.Status,
+                    Priority = t.Priority,
+                    ProjectId = t.ProjectId,
+                    SprintId = t.SprintId
+                })
+                .ToListAsync();
+        }
+
+
     }
 
 }

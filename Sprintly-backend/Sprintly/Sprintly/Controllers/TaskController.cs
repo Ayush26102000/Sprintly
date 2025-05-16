@@ -71,5 +71,16 @@ namespace Sprintly.API.Controllers
             var claim = User.FindFirst(ClaimTypes.NameIdentifier);
             return claim != null ? Guid.Parse(claim.Value) : throw new UnauthorizedAccessException();
         }
+
+
+        [HttpGet("filter-sort")]
+        [Authorize]
+        public async Task<IActionResult> FilterAndSortTasks([FromQuery] TaskStatus? status, [FromQuery] Priority? priority, [FromQuery] string? sortBy, [FromQuery] bool descending = false)
+        {
+            var userId = GetUserIdFromClaims(); 
+            var tasks = await _taskService.FilterAndSortTasksAsync(userId, status, priority, sortBy, descending);
+            return Ok(tasks);
+        }
+
     }
 }
