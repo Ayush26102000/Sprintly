@@ -21,6 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ISubtaskService, SubtaskService>();
 
 
 // API Versioning
