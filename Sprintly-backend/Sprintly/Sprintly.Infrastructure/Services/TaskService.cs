@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProjectPilot.Infrastructure.Persistence;
 using Sprintly.Application.DTOs.Tasks;
 using Sprintly.Application.Interfaces;
@@ -13,10 +14,12 @@ namespace Sprintly.Infrastructure.Services
     public class TaskService : ITaskService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<TaskService> _logger;
 
-        public TaskService(ApplicationDbContext context)
+        public TaskService(ApplicationDbContext context,ILogger<TaskService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<Guid> CreateTaskAsync(CreateTaskDto dto, Guid userId)
@@ -34,6 +37,7 @@ namespace Sprintly.Infrastructure.Services
 
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
+            _logger.LogInformation("Task created: {@Task}", task);
             return task.Id;
         }
 
