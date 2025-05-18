@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {}
 
     ngOnInit(): void {
@@ -55,9 +57,10 @@ goToLogin(){
 
   register() {
     if (this.form.valid) {
-      this.http.post<{ token: string }>('http://localhost:5001/api/auth/register', this.form.value).subscribe({
+      this.authService.register(this.form.value).subscribe({
         next: (res) => {
-          localStorage.setItem('token', res.token);
+          this.authService.setToken(res.token);
+           alert("login");
           this.messageService.add({ severity: 'success', summary: 'Registered', detail: 'Account created' });
           this.router.navigate(['/login']);
         },

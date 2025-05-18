@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../services/auth-service/auth.service'; // adjust path as needed
 // PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -37,7 +38,8 @@ form!: FormGroup;
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authservice : AuthService
   ) {}
 
 
@@ -54,11 +56,12 @@ form!: FormGroup;
 
   login() {
     if (this.form.valid) {
-      this.http.post<{ token: string }>('https://localhost:5001/api/auth/login', this.form.value).subscribe({
+         this.authservice.login(this.form.value).subscribe({
         next: (res) => {
-          localStorage.setItem('token', res.token);
+          this.authservice.setToken(res.token);
+          alert("login");
           this.messageService.add({ severity: 'success', summary: 'Login', detail: 'Success' });
-          this.router.navigate(['/dashboard']); // Update as needed
+          //this.router.navigate(['/dashboard']); // Update as needed
         },
         error: () => {
           this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid credentials' });
