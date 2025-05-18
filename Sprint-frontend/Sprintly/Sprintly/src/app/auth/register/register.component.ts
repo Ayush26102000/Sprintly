@@ -60,7 +60,6 @@ goToLogin(){
       this.authService.register(this.form.value).subscribe({
         next: (res) => {
           this.authService.setToken(res.token);
-           alert("login");
           this.messageService.add({ severity: 'success', summary: 'Registered', detail: 'Account created' });
           this.router.navigate(['/login']);
         },

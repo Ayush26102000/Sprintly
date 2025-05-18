@@ -59,7 +59,6 @@ form!: FormGroup;
          this.authservice.login(this.form.value).subscribe({
         next: (res) => {
           this.authservice.setToken(res.token);
-          alert("login");
           this.messageService.add({ severity: 'success', summary: 'Login', detail: 'Success' });
           //this.router.navigate(['/dashboard']); // Update as needed
         },
