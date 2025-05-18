@@ -1,0 +1,68 @@
+<p-toast></p-toast>
+
+<p-card styleClass="login-card">
+  <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
+
+    <!-- Left side -->
+    <div class="left">
+      <div>
+        <p class="welcome-text">Hello, Welcome Back!</p>
+        <a class="register-link" (click)="goToRegister()">Don't have an account?</a>
+        <button type="button" label="Register" class="register-btn" (click)="goToRegister()">Register</button>
+      </div>
+    </div>
+
+    <!-- Right side -->
+    <div class="right">
+      <div>
+        <h1>Login</h1>
+
+        <div class="p-field">
+          <input
+            id="email"
+            type="text"
+            pInputText
+            formControlName="email"
+            placeholder="Enter your email"
+            autocomplete="off"
+          />
+          <span class="material-symbols-outlined person"></span>
+        </div>
+
+        <div class="p-field">
+          <input
+            id="password"
+            type="password"
+            pPassword
+            formControlName="password"
+            toggleMask="true"
+            placeholder="Password"
+            autocomplete="off"
+          />
+          <span class="material-symbols-outlined lock"></span>
+        </div>
+
+        <a class="forgot-password" href="">Forgot Password?</a>
+
+        <button
+          pButton
+          type="submit"
+          label="Login"
+          class="login-btn"
+          [disabled]="form.invalid"
+        ></button>
+
+        <!-- <p class="social-text">or login with social platforms</p>
+        <div class="social-icons">
+          <a href=""><i class="fa-brands fa-google"></i></a>
+          <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+          <a href=""><i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+        </div> -->
+
+        
+      </div>
+    </div>
+
+  </form>
+</p-card>

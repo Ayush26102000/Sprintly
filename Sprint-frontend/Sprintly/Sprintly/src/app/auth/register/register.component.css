@@ -1,0 +1,143 @@
+/* Card container */
+.custom-card {
+  padding: 0 !important;
+  width: 850px;
+  height: 550px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  margin: 3rem auto;
+  box-shadow: 0 8px 20px rgb(116 148 236 / 0.4);
+}
+
+:host {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #5c7edc;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Form container */
+.custom-form {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Left panel */
+.left {
+  background-color: #7494ec;
+  width: 50%;
+  border-radius: 30px 30% 30% 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+.left div {
+  text-align: center;
+  line-height: 40px;
+  width: max-content;
+}
+
+.left p {
+  font-size: 36px;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.left a {
+  display: block;
+  color: white;
+  font-size: 14.5px;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.left input[type="submit"] {
+  border: 2px solid #fff;
+  width: 160px;
+  height: 46px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.left input[type="submit"]:hover {
+  background-color: white;
+  color: #7494ec;
+}
+
+/* Right panel */
+.right {
+  background: white;
+  width: 50%;
+  padding: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right div {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.right h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+
+/* Inputs styling */
+.right input[pInputText],
+.right input[pPassword] {
+  width: 100% !important;
+  padding: 13px 20px !important;
+  margin-bottom: 15px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  background-color: #efefef !important;
+  font-size: 16px !important;
+  box-sizing: border-box;
+  outline-color: transparent !important;
+}
+
+/* Button styling */
+.right .btn-register {
+  background-color: #7494ec !important;
+  width: 100% !important;
+  height: 48px !important;
+  color: white !important;
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  border: none !important;
+  margin-top: 10px !important;
+  transition: background-color 0.3s ease;
+}
+
+.right .btn-register:disabled {
+  background-color: #a0b8f9 !important;
+  cursor: not-allowed !important;
+}
+
+.right .btn-register:not(:disabled):hover {
+  background-color: #5c7edc !important;
+  color: white !important;
+}

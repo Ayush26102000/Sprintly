@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+
+<p-card styleClass="custom-card">
+  <form [formGroup]="form" (ngSubmit)="register()" class="custom-form">
+
+    <!-- Left Panel -->
+    <div class="left">
+      <div>
+        <p>Welcome to Sprintly!📅</p>
+        <!-- <a href="" >Already have an account?</a> -->
+        <input type="submit" value="Login" (click)="goToLogin()" />
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right">
+      <div>
+        <h1>Register</h1>
+
+        <input id="name" type="text" pInputText placeholder="Name" formControlName="name"autocomplete="off" />
+        <input id="email" type="text" pInputText placeholder="Email" formControlName="email" autocomplete="off"/>
+        <input id="password" type="password" pPassword placeholder="Password" formControlName="password" toggleMask="true" autocomplete="off" />
+
+        <button type="submit" pButton label="Register" [disabled]="form.invalid" class="btn-register"></button>
+      </div>
+    </div>
+
+  </form>
+</p-card>
