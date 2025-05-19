@@ -6,11 +6,14 @@ import { providePrimeNG } from 'primeng/config';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptor } from './Interceptors/jwt.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { loaderInterceptor } from './Interceptors/loader';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        }),    provideHttpClient(withInterceptors([jwtInterceptor])), provideAnimations()]
+    providers: [
+        provideZoneChangeDetection({ eventCoalescing: true }),
+        provideRouter(routes), providePrimeNG({theme: {preset: Aura}}), 
+        provideHttpClient(withInterceptors([jwtInterceptor,loaderInterceptor ])), 
+        provideAnimations(),
+        
+    ]
 };

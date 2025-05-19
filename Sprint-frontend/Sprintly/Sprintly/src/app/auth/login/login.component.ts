@@ -60,7 +60,7 @@ form!: FormGroup;
         next: (res) => {
           this.authservice.setToken(res.token);
           this.messageService.add({ severity: 'success', summary: 'Login', detail: 'Success' });
-          //this.router.navigate(['/dashboard']); // Update as needed
+          setTimeout(() => { this.router.navigate(['/dashboard']);}, 2000);
         },
         error: () => {
           this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid credentials' });
