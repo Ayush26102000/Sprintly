@@ -102,10 +102,10 @@
   margin-bottom: 2rem;
   opacity: 0.7;
 }
-
-/* Inputs styling */
-.right input[pInputText],
-.right input[pPassword] {
+/* Shared Input Style */
+::ng-deep .p-inputtext,
+::ng-deep .p-password input,
+::ng-deep .p-dropdown {
   width: 100% !important;
   padding: 13px 20px !important;
   margin-bottom: 15px !important;
@@ -114,30 +114,34 @@
   background-color: #efefef !important;
   font-size: 16px !important;
   box-sizing: border-box;
-  outline-color: transparent !important;
+}
+
+/* Dropdown Panel fix */
+::ng-deep .p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
+/* Optional: Focus and Hover styles */
+::ng-deep .p-inputtext:focus,
+::ng-deep .p-password input:focus,
+::ng-deep .p-dropdown.p-focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #5c7edc44;
+  border-color: #5c7edc !important;
 }
 
 /* Button styling */
-.right .btn-register {
-  background-color: #7494ec !important;
-  width: 100% !important;
-  height: 48px !important;
-  color: white !important;
-  border-radius: 8px !important;
-  font-weight: bold !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
-  border: none !important;
-  margin-top: 10px !important;
-  transition: background-color 0.3s ease;
+::ng-deep .btn-register {
+  width: 100%;
+  background-color: #5c7edc;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.right .btn-register:disabled {
-  background-color: #a0b8f9 !important;
-  cursor: not-allowed !important;
-}
-
-.right .btn-register:not(:disabled):hover {
-  background-color: #5c7edc !important;
-  color: white !important;
+::ng-deep .btn-register:hover {
+  background-color: #4766c9;
 }

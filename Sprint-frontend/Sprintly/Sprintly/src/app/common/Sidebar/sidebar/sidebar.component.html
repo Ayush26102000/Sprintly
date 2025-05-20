@@ -6,20 +6,22 @@
     </div>
     <i class="bx bx-menu" id="btn" (click)="toggleSidebar()">*</i>
   </div>
-<ul class="nav_list"> <li *ngFor="let item of filteredMenu"> <a [routerLink]="item.route"> <span class="links_name">{{ item.name }}</span> </a> </li> </ul>
+  <ul class="nav_list">
+    <li *ngFor="let item of filteredMenu"> <a [routerLink]="item.route"> <span class="links_name">{{ item.name }}</span>
+      </a>
+    </li>
+  </ul>
   <div class="profile_content">
     <div class="profile" [class.active]="isActive">
       <div class="profile_details" [class.active]="isActive">
-        <img
-          src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg"
-          alt="Profile Image"
-        />
+        <img src="https://cactusthemes.com/blog/wp-content/uploads/2018/01/tt_avatar_small.jpg" alt="Profile Image" />
         <div class="name_job">
           <div class="name">Ayush Kamble</div>
           <div class="job">Software Developer</div>
         </div>
       </div>
-      <i class="bx bx-log-out" id="log_out"></i>
+       
     </div>
+   <div class="profile" style="cursor: pointer;"  [class.active]="isActive" >Logout</div>
   </div>
 </div>

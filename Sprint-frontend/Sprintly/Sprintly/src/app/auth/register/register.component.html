@@ -13,17 +13,27 @@
     </div>
 
     <!-- Right Panel -->
-    <div class="right">
-      <div>
-        <h1>Register</h1>
+   <div class="right">
+  <div class="p-fluid">
+    <h1>Register</h1>
 
-        <input id="name" type="text" pInputText placeholder="Name" formControlName="name"autocomplete="off" />
-        <input id="email" type="text" pInputText placeholder="Email" formControlName="email" autocomplete="off"/>
-        <input id="password" type="password" pPassword placeholder="Password" formControlName="password" toggleMask="true" autocomplete="off" />
+    <input id="name" type="text" pInputText placeholder="Name" formControlName="name" autocomplete="off" />
+    <input id="email" type="text" pInputText placeholder="Email" formControlName="email" autocomplete="off" />
+    <p-password id="password" formControlName="password" placeholder="Password" toggleMask="true" autocomplete="off"></p-password>
 
-        <button type="submit" pButton label="Register" [disabled]="form.invalid" class="btn-register"></button>
-      </div>
-    </div>
+    <p-dropdown
+      [options]="roles"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select Role"
+      formControlName="role"
+      class="p-inputtext-sm">
+    </p-dropdown>
+
+    <button type="submit" pButton label="Register" [disabled]="form.invalid" class="btn-register"></button>
+  </div>
+</div>
+ 
 
   </form>
 </p-card>

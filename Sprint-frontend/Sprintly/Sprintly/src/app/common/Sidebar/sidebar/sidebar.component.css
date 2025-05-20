@@ -72,6 +72,8 @@
   left: 90%;
 }
 
+
+
 .sidebar ul {
   margin-top: 20px;
 }
@@ -156,6 +158,7 @@
   white-space: nowrap;
   padding-left: 10px;
 }
+
 
 .sidebar ul li a:hover {
   color: #11101d;

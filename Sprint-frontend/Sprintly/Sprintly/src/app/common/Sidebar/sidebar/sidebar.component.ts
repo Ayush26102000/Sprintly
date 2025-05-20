@@ -23,21 +23,21 @@ export class SidebarComponent implements OnInit {
 
   menuItems: MenuItem[] = [
     { name: 'Dashboard', route: '/dashboard', roles: [1, 2, 3] },
-    { name: 'User', route: '/user', roles: [1] },
-    { name: 'Messages', route: '/messages', roles: [1, 2] },
-    { name: 'Analytics', route: '/analytics', roles: [2] },
-    { name: 'Files Manager', route: '/files', roles: [1, 3] },
-    { name: 'Order', route: '/order', roles: [1, 2, 3] },
-    { name: 'Saved', route: '/saved', roles: [2] },
-    { name: 'Settings', route: '/settings', roles: [1, 2, 3] }
+    { name: 'Profile', route: '/profile', roles: [1, 2, 3] },
+    { name: 'Users', route: '/user', roles: [1 ,2] },
+    { name: 'Task', route: '/task', roles: [1, 2 ,3] },
+    { name: 'Sprint', route: '/sprint', roles: [1, 2 ] },
+    { name: 'Reports', route: '/reports', roles: [1, 2] },
+    { name: 'Projects', route: '/projects', roles: [1, 2 ] }
   ];
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    if (token) {
+    if (token) { 
       const decoded: any = jwtDecode(token);
-      this.roleId = decoded?.roleId; // make sure your payload includes roleId
-      this.filteredMenu = this.menuItems.filter(item => item.roles.includes(this.roleId));
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const roleId = +payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      this.filteredMenu = this.menuItems.filter(item => item.roles.includes(roleId));
     }
   }
 

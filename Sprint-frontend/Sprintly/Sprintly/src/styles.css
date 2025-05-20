@@ -3,3 +3,11 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+::ng-deep .p-dropdown-panel {
+  z-index: 9999 !important;
+}
+
+::ng-deep .p-password-panel {
+  z-index: 9998 !important;
+}
