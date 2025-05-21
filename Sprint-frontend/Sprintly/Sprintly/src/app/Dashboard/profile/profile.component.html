@@ -1,0 +1,8 @@
+<div class="main-layout" [class.sidebar-active]="isSidebarActive">
+  <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
+
+  <div class="dashboard-content">
+    <div>Profile Header</div>
+    <div>Profile Dashboard</div>
+  </div>
+</div>
