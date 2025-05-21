@@ -53,10 +53,10 @@ Sprintly/
 - [x] Entity Framework Core Setup (Code First)
 - [x] Entities, Enums, and DbContext Created
 - [x] First Migration Applied
-- [ ] Repositories & Services (In Progress)
-- [ ] Angular Frontend Setup (Upcoming)
+- [x] Repositories & Services 
+- [x] Angular Frontend Setup 
 - [ ] SignalR Notification System
-- [ ] Role Management & Auth
+- [x] Role Management & Auth
 - [ ] Kanban/Gantt UI Views
 
 ---
