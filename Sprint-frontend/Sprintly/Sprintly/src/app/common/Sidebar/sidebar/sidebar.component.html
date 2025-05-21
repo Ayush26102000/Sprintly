@@ -4,7 +4,7 @@
       <i class="bx bxl-javascript"></i>
       <div class="logo_name">Menu</div>
     </div>
-    <i class="bx bx-menu" id="btn" (click)="toggleSidebar()">*</i>
+    <i class="bx bx-menu" id="btn" (click)="toggleSidebarState()">*</i>
   </div>
   <ul class="nav_list">
     <li *ngFor="let item of filteredMenu"> <a [routerLink]="item.route"> <span class="links_name">{{ item.name }}</span>

@@ -1,0 +1,8 @@
+.dashboard-content {
+  padding-left: 78px;
+  transition: padding-left 0.5s ease;
+}
+
+.main-layout.sidebar-active .dashboard-content {
+  padding-left: 240px;
+}

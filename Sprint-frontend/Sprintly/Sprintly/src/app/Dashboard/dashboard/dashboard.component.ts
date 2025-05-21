@@ -8,5 +8,5 @@ import { SidebarComponent } from "../../common/Sidebar/sidebar/sidebar.component
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-    
+      isSidebarActive = false;
 }

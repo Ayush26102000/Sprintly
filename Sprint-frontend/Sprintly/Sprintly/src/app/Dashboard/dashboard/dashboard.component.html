@@ -1,7 +1,8 @@
-<div>
-    <app-sidebar></app-sidebar>
-    <div>
-        <div>Task Header</div>
-        <div>Task Dashboard</div>
-    </div>
+<div class="main-layout" [class.sidebar-active]="isSidebarActive">
+  <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
+
+  <div class="dashboard-content">
+    <div>Task Header</div>
+    <div>Task Dashboard</div>
+  </div>
 </div>

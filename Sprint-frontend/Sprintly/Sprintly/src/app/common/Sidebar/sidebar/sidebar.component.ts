@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {jwtDecode} from 'jwt-decode';
 import { RouterLink } from '@angular/router';
@@ -17,6 +17,8 @@ interface MenuItem {
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  @Output() toggleSidebar = new EventEmitter<boolean>();
+  
   isActive = false;
   roleId: number = 0;
   filteredMenu: MenuItem[] = [];
@@ -41,7 +43,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  toggleSidebar() {
-    this.isActive = !this.isActive;
-  }
+  toggleSidebarState() {
+      this.isActive = !this.isActive;
+    this.toggleSidebar.emit(this.isActive);
+    }
 }
