@@ -1,10 +1,10 @@
 <div class="main-layout" [class.sidebar-active]="isSidebarActive">
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
-  <div class="dashboard-content">
+  <div class="dashboard-content"  (click)="closeSidebarOnBodyClick()">
     <app-header ></app-header>
 
-    <div class="page-body" (click)="closeSidebarOnBodyClick()">
+    <div class="page-body">
       Profile Dashboard
     </div>
   </div>

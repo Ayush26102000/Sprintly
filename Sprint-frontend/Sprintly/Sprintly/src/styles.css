@@ -27,4 +27,5 @@ html, body {
 
 .main-layout.sidebar-active .dashboard-content {
   padding-left: 240px;
+background: #11101d82;
 }

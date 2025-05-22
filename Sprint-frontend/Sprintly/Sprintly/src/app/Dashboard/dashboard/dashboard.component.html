@@ -1,7 +1,7 @@
 <div class="main-layout" [class.sidebar-active]="isSidebarActive">
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
-  <div class="dashboard-content">
+  <div class="dashboard-content"  (click)="closeSidebarOnBodyClick()">
     <div>
         <app-header></app-header>
     </div>
