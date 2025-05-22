@@ -26,6 +26,8 @@ export class SidebarComponent implements OnInit {
   roleId: number = 0;
   filteredMenu: MenuItem[] = [];
 
+
+
   menuItems: MenuItem[] = [
     { name: 'Dashboard', route: '/dashboard', roles: [1, 2, 3] },
     { name: 'Profile', route: '/profile', roles: [1, 2, 3] },
@@ -58,4 +60,11 @@ export class SidebarComponent implements OnInit {
     logout(){
       this.authService.logout();
     }
+
+    closeSidebar() {
+     this.isActive = false;
+    this.toggleSidebar.emit(false);
+  
+}
+
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SidebarComponent } from "../../common/Sidebar/sidebar/sidebar.component";
 import { HeaderComponent } from "../../common/Header/header/header.component";
 
@@ -10,4 +10,13 @@ import { HeaderComponent } from "../../common/Header/header/header.component";
 })
 export class DashboardComponent {
       isSidebarActive = false;
+
+      
+  @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
+
+  closeSidebarOnBodyClick() {
+    if (this.isSidebarActive) {
+      this.sidebar.closeSidebar();
+    }
+  }
 }

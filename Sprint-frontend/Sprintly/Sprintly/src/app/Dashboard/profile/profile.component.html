@@ -2,7 +2,10 @@
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
   <div class="dashboard-content">
-    <div>        <app-header></app-header></div>
-    <div>Profile Dashboard</div>
+    <app-header ></app-header>
+
+    <div class="page-body" (click)="closeSidebarOnBodyClick()">
+      Profile Dashboard
+    </div>
   </div>
 </div>
