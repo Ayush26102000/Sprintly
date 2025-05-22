@@ -4,6 +4,9 @@ html, body {
   padding: 0;
 }
 
+
+
+
 ::ng-deep .p-dropdown-panel {
   z-index: 9999 !important;
 }
@@ -12,6 +15,8 @@ html, body {
   z-index: 9998 !important;
 }
 .dashboard-content {
+  display: flex;
+  flex-direction: column;
   padding-left: 78px;
   transition: padding-left 0.5s ease;
 }

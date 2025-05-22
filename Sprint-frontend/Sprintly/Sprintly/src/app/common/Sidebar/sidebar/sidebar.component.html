@@ -1,10 +1,15 @@
 <div class="sidebar" [class.active]="isActive">
-  <div class="logo_content">
+  <div class="logo_content" >
+    <div class="menu-icon"  [class.active]="isActive" (click)="toggleSidebarState()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div class="logo">
       <i class="bx bxl-javascript"></i>
       <div class="logo_name">Menu</div>
     </div>
-    <i class="bx bx-menu" id="btn" (click)="toggleSidebarState()">*</i>
+    
   </div>
   <ul class="nav_list">
     <li *ngFor="let item of filteredMenu"> <a [routerLink]="item.route"> <span class="links_name">{{ item.name }}</span>
@@ -20,8 +25,5 @@
           <div class="job">Software Developer</div>
         </div>
       </div>
-       
     </div>
-<div class="profile" style="cursor: pointer;" [class.active]="isActive" (click)="logout()">Logout</div>
   </div>
-</div>
