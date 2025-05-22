@@ -29,3 +29,7 @@ html, body {
   padding-left: 240px;
 background: #11101d82;
 }
+
+.page-body{
+    height: 90vh;
+}
