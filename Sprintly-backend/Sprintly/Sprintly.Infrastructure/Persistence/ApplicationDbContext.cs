@@ -14,6 +14,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Subtask> Subtasks => Set<Subtask>();
     public DbSet<Tenant> Tenants => Set<Tenant>();
 
+    public DbSet<Sprint> Sprints => Set<Sprint>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);

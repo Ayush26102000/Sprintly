@@ -11,7 +11,6 @@ import { HeaderComponent } from "../../common/Header/header/header.component";
 export class ProfileComponent {
 isSidebarActive = false;
 
-
   @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
 
   closeSidebarOnBodyClick() {
