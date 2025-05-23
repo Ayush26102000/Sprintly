@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: MenuItem[] = [
     { name: 'Dashboard', route: '/dashboard', roles: [1, 2, 3] },
+    { name: 'Company', route: '/company', roles: [1] },
     { name: 'Profile', route: '/profile', roles: [1, 2, 3] },
     { name: 'Users', route: '/user', roles: [1 ,2] },
     { name: 'Task', route: '/task', roles: [1, 2 ,3] },

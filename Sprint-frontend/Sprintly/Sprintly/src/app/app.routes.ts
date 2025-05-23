@@ -8,12 +8,14 @@ import { TaskComponent } from './Dashboard/task/task.component';
 import { SprintComponent } from './Dashboard/sprint/sprint.component';
 import { ReportsComponent } from './Dashboard/reports/reports.component';
 import { ProjectsComponent } from './Dashboard/projects/projects.component';
+import { CompanyComponent } from './Dashboard/company/company.component';
 
 export const routes: Routes = [
 
      { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'company', component: CompanyComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: UsersComponent },
