@@ -140,8 +140,13 @@ export class UsersComponent {
 
   saveUser() {
     if (this.editingIndex === null) {
-      
-      this.userService.createUser(this.formData).subscribe(() => {
+
+const payload = {
+  ...this.formData,
+  role: this.formData.roleId // now it's already a number
+};
+
+      this.userService.createUser(payload).subscribe(() => {
         this.loadUsers();
         this.closeModal();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User created successfully' });

@@ -60,7 +60,13 @@
         </div>
         <div class="form-group">
           <label>Role</label>
-          <p-dropdown [options]="roles" [(ngModel)]="formData.roleId" optionLabel="label"></p-dropdown>
+          <p-dropdown 
+  [options]="roles" 
+  [(ngModel)]="formData.roleId" 
+  optionLabel="label" 
+  optionValue="value">
+</p-dropdown>
+
         </div>
         <div class="form-group">
           <label>Email</label>
