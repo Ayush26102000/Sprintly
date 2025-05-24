@@ -40,7 +40,7 @@ namespace Sprintly.Infrastructure.Services
                 Name = dto.Name,
                 Email = dto.Email,
                 RoleId = (int)dto.Role,
-                TenantId = new Guid()
+                TenantId = dto.TenantId
             };
             user.PasswordHash = _passwordHasher.HashPassword(user, dto.Password);
 

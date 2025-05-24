@@ -12,6 +12,9 @@ namespace Sprintly.Application.DTOs.Auth
         public string Email { get; set; } = default!;
         public string Password { get; set; } = default!;
         public RoleType Role { get; set; }
+
+        public Guid TenantId { get; set; }
+
     }
 
 }
