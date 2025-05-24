@@ -3,6 +3,8 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProjectPilot.Application.Interfaces;
+using ProjectPilot.Infrastructure.Services;
 using Serilog;
 using Sprintly.Application.Interfaces;
 using Sprintly.Infrastructure.Middleware;
@@ -22,6 +24,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ITenantService, TenantService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<ISprintService, SprintService>();
 builder.Services.AddScoped<ISubtaskService, SubtaskService>();
 
 
