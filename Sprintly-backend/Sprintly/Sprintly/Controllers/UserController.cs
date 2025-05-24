@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectPilot.Application.DTOs.Users;
 using ProjectPilot.Application.Interfaces;
+using ProjectPilot.Infrastructure.Services;
 using Sprintly.Application.DTOs.Auth;
 using Sprintly.Application.Interfaces;
 
@@ -55,6 +56,16 @@ namespace ProjectPilot.API.Controllers
             var success = await _service.DeleteUserAsync(id);
             if (!success) return NotFound();
             return NoContent();
+        }
+
+        [HttpGet("tenant-by-email/{email}")]
+        public async Task<IActionResult> GetTenantByEmail(string email)
+        {
+            var tenant = await _service.GetTenantByEmailAsync(email);
+            if (tenant == null)
+                return NotFound("Tenant not found");
+
+            return Ok(tenant);
         }
     }
 }

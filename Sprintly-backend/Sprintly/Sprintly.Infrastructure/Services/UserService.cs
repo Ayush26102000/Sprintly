@@ -2,6 +2,7 @@
 using ProjectPilot.Application.DTOs.Users;
 using ProjectPilot.Application.Interfaces;
 using ProjectPilot.Infrastructure.Persistence;
+using Sprintly.Application.DTOs.Tenant;
 
 namespace ProjectPilot.Infrastructure.Services
 {
@@ -27,6 +28,22 @@ namespace ProjectPilot.Infrastructure.Services
                     TenantId = u.TenantId,
                     TenantName = u.Tenant.Name
                 }).ToListAsync();
+        }
+
+        public async Task<TenantResponseDto> GetTenantByEmailAsync(string email)
+        {
+            var user = await _context.Users
+                .Include(u => u.Tenant)
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null || user.Tenant == null)
+                return null;
+
+            return new TenantResponseDto
+            {
+                Id = user.Tenant.Id,
+                Name = user.Tenant.Name
+            };
         }
 
         public async Task<UserResponseDto?> GetUserByIdAsync(Guid id)
