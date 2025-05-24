@@ -1,4 +1,3 @@
-
 <div class="main-layout" [class.sidebar-active]="isSidebarActive">
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
@@ -13,38 +12,41 @@
         <button pButton label="+ Create User" class="create-btn" (click)="openModal()"></button>
       </div>
 
- <p-table #dt [value]="users" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilterFields]="['name', 'email']" sortMode="multiple" [filterDelay]="0" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users">
-  <ng-template pTemplate="caption">
-    <div class="flex justify-between items-center">
-      <span class="text-lg font-semibold">User List</span>
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input pInputText type="text" [(ngModel)]="globalFilterValue" (ngModelChange)="dt.filterGlobal($event, 'contains')" />
-      </span>
-    </div>
-  </ng-template>
+      <p-table #dt [value]="users" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]"
+        [globalFilterFields]="['name', 'email']" sortMode="multiple" [filterDelay]="0" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-semibold">User List</span>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" [(ngModel)]="globalFilterValue"
+                (ngModelChange)="dt.filterGlobal($event, 'contains')" />
+            </span>
+          </div>
+        </ng-template>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-      <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-      <th pSortableColumn="roleId">Role <p-sortIcon field="roleId"></p-sortIcon></th>
-      <th>Actions</th>
-    </tr>
-  </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+            <th pSortableColumn="roleId">Role <p-sortIcon field="roleId"></p-sortIcon></th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
 
-  <ng-template pTemplate="body" let-user let-i="rowIndex">
-    <tr>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ getRoleLabel(user.roleId) }}</td>
-      <td>
-        <button pButton  (click)="openModal(i)"  class="create-btn" style="margin-right: 10px;" >Update</button>
-        <button  pButton (click)="deleteUser(i)"  class="create-btn" >Delete </button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+        <ng-template pTemplate="body" let-user let-i="rowIndex">
+          <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ getRoleLabel(user.roleId) }}</td>
+            <td>
+              <button pButton (click)="openModal(i)" class="create-btn" style="margin-right: 10px;">Update</button>
+              <button pButton (click)="deleteUser(i)" class="create-btn">Delete </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
 
     </div>
 
@@ -60,12 +62,8 @@
         </div>
         <div class="form-group">
           <label>Role</label>
-          <p-dropdown 
-  [options]="roles" 
-  [(ngModel)]="formData.roleId" 
-  optionLabel="label" 
-  optionValue="value">
-</p-dropdown>
+          <p-dropdown [options]="roles" [(ngModel)]="formData.roleId" optionLabel="label" optionValue="value">
+          </p-dropdown>
 
         </div>
         <div class="form-group">

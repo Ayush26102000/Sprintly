@@ -72,7 +72,7 @@ export class UsersComponent {
   ];
 
   ngOnInit() {
-       const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const email = this.getEmailFromToken(token);
 
     if (email) {
@@ -84,10 +84,10 @@ export class UsersComponent {
   }
 
   loadUsers() {
-  this.userService.getAllUsers().subscribe(users => {
-    this.users = users;
-  });
-}
+    this.userService.getAllUsers().subscribe(users => {
+      this.users = users;
+    });
+  }
 
   getEmailFromToken(token: string | null): string | null {
     if (!token) return null;
@@ -141,10 +141,10 @@ export class UsersComponent {
   saveUser() {
     if (this.editingIndex === null) {
 
-const payload = {
-  ...this.formData,
-  role: this.formData.roleId // now it's already a number
-};
+      const payload = {
+        ...this.formData,
+        role: this.formData.roleId // now it's already a number
+      };
 
       this.userService.createUser(payload).subscribe(() => {
         this.loadUsers();

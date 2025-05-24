@@ -2,7 +2,73 @@
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
   <div class="dashboard-content" (click)="closeSidebarOnBodyClick()">
-    <div>        <app-header></app-header></div>
-    <div class="page-body" >Project Dashboard</div>
+    <p-toast></p-toast>
+    <app-header></app-header>
+
+    <div class="page-body">
+      <div class="header-row">
+        <h2>Project Dashboard</h2>
+        <button pButton label="+ Create Project" class="create-btn" (click)="openModal()"></button>
+      </div>
+
+      <p-table #dt [value]="projects" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+        [globalFilterFields]="['title', 'description']" sortMode="multiple" [filterDelay]="0"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} projects">
+        
+        <ng-template pTemplate="caption">
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-semibold">Project List</span>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" [(ngModel)]="globalFilterValue"
+                (ngModelChange)="dt.filterGlobal($event, 'contains')" />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">Title <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-project let-i="rowIndex">
+          <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.description }}</td>
+
+            <td>
+              <button pButton class="create-btn" label="Update" (click)="openModal(i)" style="margin-right: 10px;"></button>
+              <button pButton class="create-btn" label="Delete" (click)="deleteProject(i)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-dialog [(visible)]="isModalOpen" [modal]="true" [closable]="false" [style]="{ width: '400px' }">
+      <ng-template pTemplate="header">
+        <h3>{{ modalTitle }}</h3>
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <div class="form-group">
+          <label>Title</label>
+          <input pInputText [(ngModel)]="formData.name" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea pInputTextarea rows="3" [(ngModel)]="formData.description"></textarea>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button class="create-btn" pButton label="Cancel" (click)="closeModal()"></button>
+        <button class="create-btn" pButton label="Save" (click)="saveProject()"></button>
+      </ng-template>
+    </p-dialog>
   </div>
 </div>
