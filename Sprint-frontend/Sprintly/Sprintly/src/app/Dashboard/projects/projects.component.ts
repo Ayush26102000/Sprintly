@@ -14,6 +14,7 @@ import { jwtDecode } from 'jwt-decode';
 import { UserService } from '../../services/DashboardServices/user.service';
 import { Table } from 'primeng/table';
 import { ProjectService } from '../../services/DashboardServices/project.service';
+import { CommonService } from '../../services/common.service';
 
 interface Project {
   id?: string;
@@ -55,13 +56,14 @@ export class ProjectsComponent {
 
   constructor(
     private projectService: ProjectService,
+    private commonService: CommonService,
     private userService: UserService,
     private messageService: MessageService
   ) {}
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    const email = this.getEmailFromToken(token);
+   const email = this.commonService.getEmailFromToken(token);
 
     if (email) {
       this.userService.getTenantByEmail(email).subscribe(tenant => {
@@ -75,12 +77,6 @@ export class ProjectsComponent {
     this.projectService.getAll().subscribe(projects => {
       this.projects = projects;
     });
-  }
-
-  getEmailFromToken(token: string | null): string | null {
-    if (!token) return null;
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"] ?? null;
   }
 
   closeSidebarOnBodyClick() {

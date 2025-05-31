@@ -8,13 +8,14 @@ export interface Sprint {
   startDate: string;
   endDate: string;
   projectId: string;
+  tenantID:string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class SprintService {
-  private apiUrl = 'https://your-api-url/api/sprint';
+  private apiUrl = 'http://localhost:5001/api/sprint';
 
   constructor(private http: HttpClient) {}
 
