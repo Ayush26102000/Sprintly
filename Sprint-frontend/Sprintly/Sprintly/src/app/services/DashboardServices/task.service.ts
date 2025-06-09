@@ -1,49 +1,61 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// import { TaskItem, CreateTaskDto, UpdateTaskDto } from '../models/task.model';
 
-interface Task {
+export interface Task {
   id?: string;
   title: string;
   description: string;
-  status: string;
   priority: string;
-  tenantId: string;
+  projectId: string;
+  sprintId?: string | null;
 }
-interface CreateTaskDto {
-  title: string;
+
+export interface Project {
+  id: string;
+  name: string;
   description: string;
-  priority: number;       // Assuming the enum maps to number
-  projectId: string;      // Required
-  sprintId?: string;      // Optional
+  tenantId: string;
+  tenantName: string;
 }
 
 
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class TaskService {
-  private apiUrl = 'http://localhost:5001/api/task'; 
+  private apiUrl = 'http://localhost:5001/api/task';
+  private apiPUrl = 'http://localhost:5001/api/Project';
 
   constructor(private http: HttpClient) {}
 
-  createTask(dto: CreateTaskDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create`, dto);
+  getAllTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/list`);
   }
 
-  getTasks(page = 1, pageSize = 10): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.apiUrl}/list?page=${page}&pageSize=${pageSize}`);
+ getAllProjects(): Observable<Project[]> {
+  return this.http.get<Project[]>(`${this.apiPUrl}`);
+}
+
+  createTask(task: Task): Observable<any> {
+    return this.http.post(`${this.apiUrl}/create`, task);
   }
 
-  getTaskById(id: string): Observable<Task> {
-    return this.http.get<Task>(`${this.apiUrl}/${id}`);
+  updateTask(id: string, task: Task): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${id}`, task);
   }
 
-  updateTask(id: string, dto: Task): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/update/${id}`, dto);
+  deleteTask(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
 
-  deleteTask(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  filterAndSortTasks(params: {
+    status?: string;
+    priority?: string;
+    sortBy?: string;
+    descending?: boolean;
+  }): Observable<Task[]> {
+    const queryParams = new HttpParams({ fromObject: params as any });
+    return this.http.get<Task[]>(`${this.apiUrl}/filter-sort`, { params: queryParams });
   }
 }

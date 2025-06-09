@@ -1,8 +1,98 @@
 <div class="main-layout" [class.sidebar-active]="isSidebarActive">
   <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
 
-  <div class="dashboard-content"  (click)="closeSidebarOnBodyClick()">
-    <div>        <app-header></app-header></div>
-    <div class="page-body">Task Dashboard</div>
+  <div class="dashboard-content" (click)="closeSidebarOnBodyClick()">
+    <p-toast></p-toast>
+
+    <app-header></app-header>
+
+
+    <div class="page-body">
+      <div class="header-row">
+        <h2>Task Dashboard</h2>
+        <button pButton label="+ Create Task" class="create-btn" (click)="openModal()"></button>
+      </div>
+
+      <p-table #dt [value]="tasks" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,20]"
+        [globalFilterFields]="['title', 'description']" sortMode="multiple" [filterDelay]="0"
+        [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-semibold">Task List</span>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" [(ngModel)]="globalFilterValue"
+                (ngModelChange)="dt.filterGlobal($event, 'contains')" />
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+            <th pSortableColumn="priority">Priority <p-sortIcon field="priority"></p-sortIcon></th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-task let-i="rowIndex">
+          <tr>
+            <td>{{ task.title }}</td>
+           <td>{{ priorityLabels[task.priority] }}</td>
+            <td>{{ task.description }}</td>
+            <td>
+              <button pButton (click)="openModal(i)" class="create-btn" style="margin-right: 10px;">Update</button>
+              <button pButton (click)="deleteTask(i)" class="create-btn">Delete</button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <p-dialog [(visible)]="isModalOpen" [modal]="true" [closable]="false" [style]="{ width: '400px' }">
+        <ng-template pTemplate="header">
+          <h3>{{ modalTitle }}</h3>
+        </ng-template>
+
+        <ng-template pTemplate="content">
+          <div class="form-group">
+            <label>Title</label>
+            <input pInputText [(ngModel)]="formData.title" />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea pInputTextarea [(ngModel)]="formData.description"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Priority</label><p-dropdown 
+  [options]="priorities" 
+  [(ngModel)]="formData.priority"
+  placeholder="Select priority">
+</p-dropdown>
+
+          </div>
+        <div class="form-group">
+  <label>Project</label>
+  <p-dropdown 
+    [options]="projects" 
+    [(ngModel)]="formData.projectId" 
+    optionLabel="name" 
+    optionValue="id"
+    placeholder="Select a project">
+  </p-dropdown>
+</div>
+
+          <div class="form-group">
+            <label>Sprint ID (optional)</label>
+            <input pInputText [(ngModel)]="formData.sprintId" />
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button class="create-btn" pButton label="Cancel" (click)="closeModal()"></button>
+          <button class="create-btn" pButton label="Save" (click)="saveTask()"></button>
+        </ng-template>
+      </p-dialog>
+    </div>
   </div>
 </div>
