@@ -7,6 +7,7 @@
         public string Password { get; set; } = default!;
         public int RoleId { get; set; }
         public Guid TenantId { get; set; }
+        public Guid AssignedUserId { get; set; }
     }
 
     public class UpdateUserDto

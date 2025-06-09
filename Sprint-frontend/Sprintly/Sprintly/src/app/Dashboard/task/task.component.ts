@@ -53,7 +53,9 @@ export class TaskComponent implements OnInit {
     description: '',
     priority: 'Low',
     projectId: '',
-    sprintId: null
+    sprintId: null,
+      assignedUserId: '',
+      status: 0 
   };
   priorities = [
     { label: 'Low', value: 0 },
@@ -62,12 +64,21 @@ export class TaskComponent implements OnInit {
     { label: 'Critical', value: 3 }
   ];
 
+  statuses = [
+  { label: 'Backlog', value: 0 },
+  { label: 'To Do', value: 1 },
+  { label: 'In Progress', value: 2 },
+  { label: 'Review', value: 3 },
+  { label: 'Done', value: 4 }
+];
+statusLabels = ['Backlog', 'To Do', 'In Progress', 'Review', 'Done'];
+
   isSidebarActive = false;
   isModalOpen = false;
   modalTitle = 'Add Task';
   editingIndex: number | null = null;
   globalFilterValue = '';
-
+users: any[] = [];
 
 priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
 
@@ -76,12 +87,19 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
   @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
   projects: any[] | undefined;
 
-  constructor(private taskService: TaskService, private messageService: MessageService) { }
+  constructor(private taskService: TaskService, private messageService: MessageService, private userService : UserService) { }
 
   ngOnInit() {
     this.loadTasks();
     this.loadProjects();
+      this.loadUsers();
   }
+
+  loadUsers() {
+  this.userService.getAllUsers().subscribe(users => {
+    this.users = users;
+  });
+}
 
   closeSidebarOnBodyClick() {
     if (this.isSidebarActive) {
@@ -93,6 +111,16 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
     this.taskService.getAllTasks().subscribe(tasks => {
       this.tasks = tasks;
     });
+  }
+
+    getStatusClass(status: string): string {
+    switch (status) {
+      case 'Pending': return 'status-pending';
+      case 'InProgress': return 'status-in-progress';
+      case 'Completed': return 'status-completed';
+      case 'Cancelled': return 'status-cancelled';
+      default: return '';
+    }
   }
 
   openModal(index?: number) {
@@ -109,7 +137,9 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
         description: '',
         priority: 'Low',
         projectId: '',
-        sprintId: null
+        sprintId: null,
+        assignedUserId: '',
+        status: 0 
       };
     }
   }
@@ -122,9 +152,22 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
       description: '',
       priority: 'Low',
       projectId: '',
-      sprintId: null
+      sprintId: null,
+      assignedUserId:'',
+      status: 0 
     };
   }
+
+  getUserName(userId: string): string {
+  const user = this.users.find(u => u.id === userId);
+  return user ? user.name : 'Unassigned';
+}
+onUserFilter(event: Event, dt: any) {
+  const input = event.target as HTMLInputElement;
+  dt.filter(input.value, 'assignedUserId', 'contains');
+}
+
+
 
   loadProjects() {
     this.taskService.getAllProjects().subscribe(projects => {

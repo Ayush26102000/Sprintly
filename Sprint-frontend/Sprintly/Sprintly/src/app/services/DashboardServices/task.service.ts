@@ -8,7 +8,9 @@ export interface Task {
   description: string;
   priority: string;
   projectId: string;
+    assignedUserId: string;
   sprintId?: string | null;
+    status: number;
 }
 
 export interface Project {

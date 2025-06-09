@@ -6,7 +6,7 @@
     public TaskStatus Status { get; set; }
     public Priority Priority { get; set; }
 
-    public Guid AssignedToUserId { get; set; }
+    public Guid? AssignedToUserId { get; set; }
     public User AssignedTo { get; set; } = default!;
 
     public Guid ProjectId { get; set; }

@@ -64,3 +64,35 @@
   font-weight: 500;
   margin-bottom: 0.3rem;
 }
+
+.status-pending {
+  background-color: #f9c74f;
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.status-in-progress {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.status-completed {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.status-cancelled {
+  background-color: #f44336;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}

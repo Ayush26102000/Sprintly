@@ -30,9 +30,10 @@ namespace Sprintly.Infrastructure.Services
                 Description = dto.Description,
                 Priority = dto.Priority,
                 Status = TaskStatus.InProgress, // default status
-                AssignedToUserId = userId,
+                //AssignedToUserId = userId,
                 ProjectId = dto.ProjectId,
-                SprintId = dto.SprintId
+                SprintId = dto.SprintId,
+                AssignedToUserId = dto.AssignedUserId
             };
 
             _context.Tasks.Add(task);
@@ -44,7 +45,6 @@ namespace Sprintly.Infrastructure.Services
         public async Task<IEnumerable<TaskResponseDto>> GetTasksAsync(Guid userId, int page, int pageSize)
         {
             return await _context.Tasks
-                .Where(t => t.AssignedToUserId == userId)
                 .OrderByDescending(t => t.Priority)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -56,7 +56,8 @@ namespace Sprintly.Infrastructure.Services
                     Status = t.Status,
                     Priority = t.Priority,
                     ProjectId = t.ProjectId,
-                    SprintId = t.SprintId
+                    SprintId = t.SprintId,
+                    AssignedUserId = (Guid)t.AssignedToUserId
                 })
                 .ToListAsync();
         }
@@ -83,7 +84,7 @@ namespace Sprintly.Infrastructure.Services
         public async Task<bool> UpdateTaskAsync(Guid taskId, UpdateTaskDto dto, Guid userId)
         {
             var task = await _context.Tasks
-                .FirstOrDefaultAsync(t => t.Id == taskId && t.AssignedToUserId == userId);
+                .FirstOrDefaultAsync(t => t.Id == taskId);
 
             if (task == null) return false;
 
@@ -102,7 +103,7 @@ namespace Sprintly.Infrastructure.Services
         public async Task<bool> DeleteTaskAsync(Guid taskId, Guid userId)
         {
             var task = await _context.Tasks
-                .FirstOrDefaultAsync(t => t.Id == taskId && t.AssignedToUserId == userId);
+                .FirstOrDefaultAsync(t => t.Id == taskId );
 
             if (task == null) return false;
 
@@ -120,7 +121,6 @@ namespace Sprintly.Infrastructure.Services
      bool descending = false)
         {
             var query = _context.Tasks
-                .Where(t => t.AssignedToUserId == userId)
                 .AsQueryable();
 
             if (status.HasValue)

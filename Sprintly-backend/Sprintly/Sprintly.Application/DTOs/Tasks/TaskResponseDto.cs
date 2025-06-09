@@ -13,7 +13,7 @@ namespace Sprintly.Application.DTOs.Tasks
         public string Description { get; set; } = string.Empty;
         public TaskStatus Status { get; set; }
         public Priority Priority { get; set; }
-
+        public Guid AssignedUserId { get; set; }
         public Guid ProjectId { get; set; }
         public Guid? SprintId { get; set; }
     }
