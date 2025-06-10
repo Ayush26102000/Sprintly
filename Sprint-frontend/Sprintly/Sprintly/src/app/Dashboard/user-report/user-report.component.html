@@ -1,0 +1,113 @@
+<div class="main-layout" [class.sidebar-active]="isSidebarActive">
+  <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
+
+  <div class="dashboard-content" (click)="closeSidebarOnBodyClick()">
+    <app-header></app-header>
+
+    <div class="page-body p-4">
+      <h2>User Report</h2>
+
+      <!-- PrimeNG Dropdown -->
+      <p-dropdown
+        [options]="users"
+        [(ngModel)]="selectedUserId"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select a User"
+        (onChange)="loadUserReport()"
+        styleClass="w-full md:w-30rem mb-3"
+      ></p-dropdown>
+
+      <div *ngIf="userReport">
+        <!-- Summary Cards -->
+        <div class="grid">
+          <p-card header="Tasks Summary" class="col-12 md:col-6">
+            <p>{{ userReport.userName }}</p>
+            <ul>
+              <li><b>Total Tasks:</b> {{ userReport.todoTasks + userReport.inProgressTasks + userReport.doneTasks }}</li>
+              <li><b>To Do:</b> {{ userReport.todoTasks }}</li>
+              <li><b>In Progress:</b> {{ userReport.inProgressTasks }}</li>
+              <li><b>Done:</b> {{ userReport.doneTasks }}</li>
+            </ul>
+          </p-card>
+
+          <p-card header="Tasks by Priority" class="col-12 md:col-6">
+            <ul>
+              <li *ngFor="let entry of tasksByPriorityArray">
+                {{ entry.key }}: {{ entry.value }}
+              </li>
+            </ul>
+          </p-card>
+        </div>
+
+        <!-- Task Table -->
+        <!-- Enhanced Task Table -->
+<p-table
+  #dt
+  [value]="userReport.tasks"
+  [paginator]="true"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [globalFilterFields]="['title', 'description', 'status', 'priority', 'projectName']"
+  sortMode="multiple"
+  [filterDelay]="0"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
+  responsiveLayout="scroll"
+  class="mt-4"
+>
+  <!-- Table Caption with Search -->
+  <ng-template pTemplate="caption">
+    <div class="flex justify-between items-center">
+      <span class="text-lg font-semibold">Task List</span>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          [(ngModel)]="globalTaskFilter"
+          (ngModelChange)="dt.filterGlobal($event, 'contains')"
+          placeholder="Search tasks..."
+        />
+      </span>
+    </div>
+  </ng-template>
+
+  <!-- Table Header -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+      <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+      <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+      <th pSortableColumn="priority">Priority <p-sortIcon field="priority"></p-sortIcon></th>
+      <th pSortableColumn="projectName">Project <p-sortIcon field="projectName"></p-sortIcon></th>
+    </tr>
+  </ng-template>
+
+  <!-- Table Body -->
+  <ng-template pTemplate="body" let-task>
+    <tr>
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>
+        <span
+          class="p-badge"
+          [ngClass]="{
+            'bg-secondary': task.status === 0,
+            'bg-primary': task.status === 2,
+            'bg-success': task.status === 4
+          }"
+        >
+          {{ getStatusText(task.status) }}
+        </span>
+      </td>
+      <td>Priority {{ task.priority }}</td>
+      <td>{{ task.projectName }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+      </div>
+    </div>
+  </div>
+</div>

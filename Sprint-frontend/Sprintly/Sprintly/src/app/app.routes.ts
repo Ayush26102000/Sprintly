@@ -9,6 +9,7 @@ import { SprintComponent } from './Dashboard/sprint/sprint.component';
 import { ReportsComponent } from './Dashboard/reports/reports.component';
 import { ProjectsComponent } from './Dashboard/projects/projects.component';
 import { CompanyComponent } from './Dashboard/company/company.component';
+import { UserReportComponent } from './Dashboard/user-report/user-report.component';
 
 export const routes: Routes = [
 
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'sprint', component: SprintComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'projects', component: ProjectsComponent },
+  { path: 'userreport', component: UserReportComponent },
   { path: '**', redirectTo: 'login' }
 ];

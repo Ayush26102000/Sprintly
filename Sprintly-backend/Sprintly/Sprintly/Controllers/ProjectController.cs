@@ -61,7 +61,7 @@ namespace ProjectPilot.API.Controllers
             return Ok(report);
         }
         
-        [HttpGet("{id}/report")]
+        [HttpGet("{id}/GetUserReport")]
         public async Task<IActionResult> GetUserReport(Guid id)
         {
             var report = await _service.GetUserReportAsync(id);

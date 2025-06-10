@@ -36,7 +36,8 @@ export class SidebarComponent implements OnInit {
     { name: 'Task', route: '/task', roles: [1, 2 ,3] },
     { name: 'Sprint', route: '/sprint', roles: [1, 2 ] },
     { name: 'Reports', route: '/reports', roles: [1, 2] },
-    { name: 'Projects', route: '/projects', roles: [1, 2 ] }
+    { name: 'Projects', route: '/projects', roles: [1, 2 ] },
+    { name: 'User Report', route: '/userreport', roles: [1, 2 ] }
   ];
 
   ngOnInit() {

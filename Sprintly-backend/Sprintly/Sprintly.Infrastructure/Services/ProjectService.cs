@@ -122,30 +122,36 @@ namespace Sprintly.Infrastructure.Services
 
         public async Task<UserReportDto?> GetUserReportAsync(Guid userID)
         {
-            var userLoad = await _context.Users
-                .Include(u => u.Tenant)
-                .Include(u => u.AssignedTasks)
-                .FirstOrDefaultAsync(u => u.Id == userID);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userID);
+            if (user == null) return null;
 
-            if (userLoad == null) return null;
-
-            var tasks = userLoad.AssignedTasks;
+            var tasks = await _context.Tasks
+                .Include(t => t.Project)
+                .Where(t => t.AssignedToUserId == userID)
+                .ToListAsync();
 
             var report = new UserReportDto
             {
-                UserId = userLoad.Id,
-                UserName = userLoad.Name,
-                Email = userLoad.Email,
-                TenantName = userLoad.Tenant.Name,
-
-                TotalTasks = tasks.Count,
+                UserId = user.Id,
+                UserName = user.Name,
                 TodoTasks = tasks.Count(t => t.Status == TaskStatus.ToDo),
                 InProgressTasks = tasks.Count(t => t.Status == TaskStatus.InProgress),
                 DoneTasks = tasks.Count(t => t.Status == TaskStatus.Done),
+                ProjectNames = tasks
+                    .Where(t => t.Project != null)
+                    .Select(t => t.Project.Name)
+                    .Distinct()
+                    .ToList(),
 
-                TasksByPriority = tasks
-                    .GroupBy(t => t.Priority.ToString())
-                    .ToDictionary(g => g.Key, g => g.Count())
+                Tasks = tasks.Select(t => new TaskDto
+                {
+                    TaskId = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    Status = t.Status,
+                    Priority = t.Priority,
+                    ProjectName = t.Project?.Name ?? "Unassigned"
+                }).ToList()
             };
 
             return report;

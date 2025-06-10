@@ -11,10 +11,6 @@
   overflow-x: hidden; /* Prevent horizontal scrollbar from overflow */
 }
 
-/* Page Body and Report Container Styles */
-.dashboard-content {
-  /* No specific styles needed here unless you want a different background for the main content area */
-}
 
 .page-body {
   font-size: 2.5rem; /* Larger, more impactful heading */
