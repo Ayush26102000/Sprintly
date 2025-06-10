@@ -100,10 +100,7 @@ dotnet run
 
 - Angular UI with D3-based Kanban/Gantt Chart
 - SignalR-based real-time updates
-- Advanced role/permission management
-- Organization invites & user management
 - Exporting reports as Excel/PDF
-- Caching, logging, and request throttling
 
 ---
 
