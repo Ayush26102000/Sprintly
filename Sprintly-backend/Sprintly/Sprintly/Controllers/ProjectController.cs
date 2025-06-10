@@ -24,7 +24,7 @@ namespace ProjectPilot.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
-        {
+            {
             var projects = await _service.GetAllProjectsAsync();
             return Ok(projects);
         }
@@ -57,6 +57,14 @@ namespace ProjectPilot.API.Controllers
         public async Task<IActionResult> GetReport(Guid id)
         {
             var report = await _service.GetProjectReportAsync(id);
+            if (report == null) return NotFound();
+            return Ok(report);
+        }
+        
+        [HttpGet("{id}/report")]
+        public async Task<IActionResult> GetUserReport(Guid id)
+        {
+            var report = await _service.GetUserReportAsync(id);
             if (report == null) return NotFound();
             return Ok(report);
         }

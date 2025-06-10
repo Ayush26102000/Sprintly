@@ -8,4 +8,6 @@
 
     public Guid TenantId { get; set; }
     public Tenant Tenant { get; set; } = default!;
+    public ICollection<TaskItem> AssignedTasks { get; set; } = new List<TaskItem>();
+
 }

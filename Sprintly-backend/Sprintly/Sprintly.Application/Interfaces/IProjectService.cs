@@ -11,6 +11,7 @@ namespace Sprintly.Application.Interfaces
         Task<bool> UpdateProjectAsync(Guid id, UpdateProjectDto dto);
         Task<bool> DeleteProjectAsync(Guid id);
         Task<ProjectReportDto?> GetProjectReportAsync(Guid projectId);
+        Task<UserReportDto?> GetUserReportAsync(Guid UserId);
 
     }
 }

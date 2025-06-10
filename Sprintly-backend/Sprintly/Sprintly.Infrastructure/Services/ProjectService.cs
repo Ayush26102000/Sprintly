@@ -119,5 +119,38 @@ namespace Sprintly.Infrastructure.Services
             return report;
         }
 
+
+        public async Task<UserReportDto?> GetUserReportAsync(Guid userID)
+        {
+            var userLoad = await _context.Users
+                .Include(u => u.Tenant)
+                .Include(u => u.AssignedTasks)
+                .FirstOrDefaultAsync(u => u.Id == userID);
+
+            if (userLoad == null) return null;
+
+            var tasks = userLoad.AssignedTasks;
+
+            var report = new UserReportDto
+            {
+                UserId = userLoad.Id,
+                UserName = userLoad.Name,
+                Email = userLoad.Email,
+                TenantName = userLoad.Tenant.Name,
+
+                TotalTasks = tasks.Count,
+                TodoTasks = tasks.Count(t => t.Status == TaskStatus.ToDo),
+                InProgressTasks = tasks.Count(t => t.Status == TaskStatus.InProgress),
+                DoneTasks = tasks.Count(t => t.Status == TaskStatus.Done),
+
+                TasksByPriority = tasks
+                    .GroupBy(t => t.Priority.ToString())
+                    .ToDictionary(g => g.Key, g => g.Count())
+            };
+
+            return report;
+        }
+
+
     }
 }
