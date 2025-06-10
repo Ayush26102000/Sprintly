@@ -3,6 +3,40 @@
 
   <div class="dashboard-content"  (click)="closeSidebarOnBodyClick()">
     <div>        <app-header></app-header></div>
-    <div class="page-body" >Reports Dashboard</div>
+    <!-- <div class="page-body" >Reports Dashboard</div> -->
+    <div class="report-container">
+  <p-dropdown 
+    [options]="projects" 
+    optionLabel="name" 
+    optionValue="id" 
+    [(ngModel)]="selectedProjectId" 
+    (onChange)="onProjectSelect()"
+    placeholder="Select a project"
+    styleClass="dropdown-dark">
+  </p-dropdown>
+
+  <div *ngIf="report">
+    <h2>{{ report.projectName }} – Project Report</h2>
+
+    <div class="card-row">
+      <div class="info-card" *ngFor="let item of [
+        { title: 'Total Tasks', value: report.totalTasks },
+        { title: 'To Do', value: report.todoTasks },
+        { title: 'In Progress', value: report.inProgressTasks },
+        { title: 'Done', value: report.doneTasks }
+      ]">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.value }}</p>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+      <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+    </div>
+  </div>
+</div>
+
+
   </div>
 </div>

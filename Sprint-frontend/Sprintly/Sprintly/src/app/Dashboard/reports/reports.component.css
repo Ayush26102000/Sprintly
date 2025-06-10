@@ -1,0 +1,175 @@
+/* Angular Host Component Styling */
+:host {
+  display: block;
+  /* Use a subtle linear gradient for the main background for a modern feel */
+  background: linear-gradient(180deg, #1A182E 0%, #11101d 100%);
+  color: #E0E0E0; /* Soft white for primary text */
+  padding: 2rem;
+  /* Optional: Add a subtle overall shadow if the host is within a larger container */
+  /* box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3); */
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  overflow-x: hidden; /* Prevent horizontal scrollbar from overflow */
+}
+
+/* Page Body and Report Container Styles */
+.dashboard-content {
+  /* No specific styles needed here unless you want a different background for the main content area */
+}
+
+.page-body {
+  font-size: 2.5rem; /* Larger, more impactful heading */
+  font-weight: 600; /* Semi-bold for presence */
+  color: #F0F0F0; /* Slightly brighter white for headings */
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow for depth */
+}
+
+.report-container {
+  padding: 2rem;
+  background-color: #1A182E; /* A distinct dark background for the container itself */
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Deeper, more pronounced shadow */
+  /* max-width: 1200px; */
+  width: 90vw;
+  margin: 2rem auto; /* Center the container */
+  /* min-height: 75vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally within the container */
+}
+
+
+/* Dropdown Styling (PrimeNG specific) */
+.dropdown-dark {
+  /* A slightly lighter dark background for the dropdown to contrast with the container */
+  background-color: #282645 !important;
+  color: #E0E0E0; /* Soft white text */
+  border: 1px solid #44436b; /* A subtle, slightly lighter border */
+  border-radius: 8px; /* Consistent rounded corners */
+  margin-bottom: 2rem;
+  width: 100%; /* Make it responsive */
+  max-width: 350px; /* But don't let it get too wide */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Softer shadow for the dropdown */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Adjusting PrimeNG's internal elements for consistent styling */
+/* IMPORTANT: Using ::ng-deep or :host ::ng-deep might be necessary for some PrimeNG elements
+   due to shadow DOM encapsulation, but they are deprecated. Try to override via styleClass first.
+   If these don't work, you might need to inspect the PrimeNG generated DOM and target specific classes. */
+.dropdown-dark .p-dropdown-label {
+  color: #E0E0E0 !important; /* Ensure the selected label text is white */
+  font-weight: 500;
+}
+
+.dropdown-dark .p-dropdown-trigger {
+  color: #8B89C3 !important; /* Color for the dropdown arrow icon */
+}
+
+/* When the dropdown is focused or opened */
+.dropdown-dark.p-focus {
+  border-color: #8B89C3 !important; /* Accent color on focus */
+  box-shadow: 0 0 0 0.2rem rgba(139, 137, 195, 0.25) !important; /* Soft glowing effect */
+}
+
+/* Styling for the dropdown panel (the options list) */
+/* This part usually needs global styles or ::ng-deep */
+.p-dropdown-panel {
+  background-color: #282645; /* Dark background for the panel */
+  color: #E0E0E0; /* Text color for options */
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid #44436b;
+}
+
+.p-dropdown-panel .p-dropdown-item {
+  color: #E0E0E0;
+  padding: 0.75rem 1.25rem;
+}
+
+.p-dropdown-panel .p-dropdown-item:hover {
+  background-color: #37345e; /* Lighter highlight on hover */
+  color: #FFFFFF;
+}
+
+.p-dropdown-panel .p-highlight {
+  background-color: #44436b; /* Highlighted selected item */
+  color: #FFFFFF;
+}
+
+
+/* Info Cards Styling */
+.card-row {
+  display: flex;
+  gap: 1.5rem; /* Increased gap for more breathing room */
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem; /* More space below the cards */
+  justify-content: center;
+  width: 100%; /* Ensure row takes full width */
+}
+
+.info-card {
+  /* Use a subtle gradient for cards for more depth */
+  background: linear-gradient(145deg, #282645 0%, #37345e 100%);
+  color: #F0F0F0; /* Slightly brighter text for card content */
+  border: none; /* Remove harsh border, rely on shadow */
+  padding: 1.5rem 2.5rem; /* More generous padding */
+  border-radius: 12px; /* Softer, more modern rounded corners */
+  min-width: 280px; /* Increased min-width for better display */
+  flex: 1; /* Allow cards to grow and shrink */
+  max-width: 250px; /* Max width to control card size */
+  text-align: center;
+  /* More sophisticated shadow for a floating effect */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(139, 137, 195, 0.15) inset;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover transition */
+  cursor: pointer; /* Indicate interactivity */
+}
+
+.info-card:hover {
+  transform: translateY(-5px) scale(1.02); /* Slight lift and subtle scale on hover */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(139, 137, 195, 0.3) inset; /* Enhanced shadow on hover */
+}
+
+.info-card h3 {
+  font-size: 1.2rem; /* Clearer heading size */
+  margin-bottom: 0.5rem;
+  color: #8B89C3; /* Accent color for titles */
+}
+
+.info-card p {
+  font-size: 2.2rem; /* Larger, bolder value */
+  font-weight: 700;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+/* Chart Section Styling */
+.chart-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem; /* Increased gap between charts */
+  justify-content: center;
+  width: 100%; /* Ensure charts take full width */
+}
+
+/* Adjust Chart.js canvas size for better responsiveness within flex container */
+.chart-section p-chart {
+  flex: 1; /* Allow charts to take available space */
+  min-width: 550px; /* Minimum width for charts before wrapping */
+  max-width: 500px; /* Max width for individual charts */
+  background-color: #282645; /* Dark background for charts */
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.chart-section p-chart:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure Chart.js legends and labels are visible and styled */
+/* These are typically controlled by PrimeNG chart options as you've done,
+   but this ensures the overall background supports them. */

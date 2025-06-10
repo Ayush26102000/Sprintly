@@ -52,5 +52,14 @@ namespace ProjectPilot.API.Controllers
             if (!success) return NotFound();
             return NoContent();
         }
+
+        [HttpGet("{id}/report")]
+        public async Task<IActionResult> GetReport(Guid id)
+        {
+            var report = await _service.GetProjectReportAsync(id);
+            if (report == null) return NotFound();
+            return Ok(report);
+        }
+
     }
 }

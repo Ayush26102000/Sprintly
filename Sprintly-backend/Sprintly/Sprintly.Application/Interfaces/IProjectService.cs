@@ -1,4 +1,5 @@
-﻿using Sprintly.Application.DTOs.Projects;
+﻿using Sprintly.Application.DTOs;
+using Sprintly.Application.DTOs.Projects;
 
 namespace Sprintly.Application.Interfaces
 {
@@ -9,5 +10,7 @@ namespace Sprintly.Application.Interfaces
         Task<ProjectResponseDto?> GetProjectByIdAsync(Guid id);
         Task<bool> UpdateProjectAsync(Guid id, UpdateProjectDto dto);
         Task<bool> DeleteProjectAsync(Guid id);
+        Task<ProjectReportDto?> GetProjectReportAsync(Guid projectId);
+
     }
 }

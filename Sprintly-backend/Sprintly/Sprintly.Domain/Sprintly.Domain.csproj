@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="ValueObjects\" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
   </ItemGroup>
 
 </Project>

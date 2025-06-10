@@ -34,3 +34,47 @@ background: #11101d82;
     height: 90vh;
 }
 
+
+/* For Webkit browsers (Chrome, Safari, newer Edge) */
+::-webkit-scrollbar {
+  width: 12px; /* Make it a bit narrower for a sleeker profile */
+  /* height: 12px; /* Keep this if you also have horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: #11101d; /* Your dark background for the track */
+  border-radius: 8px; /* Softer rounded corners */
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4); /* A subtle inner shadow to make it look like a groove */
+}
+
+::-webkit-scrollbar-thumb {
+  /* Use a subtle linear gradient for a modern, 'cool' look */
+  background: linear-gradient(135deg, #44436b, #5a598e);
+  border-radius: 8px; /* Rounded ends to match the track */
+  /* Replace the thick border with a soft box-shadow for depth */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* A soft glow/shadow around the thumb */
+  /* Add a smooth transition for hover effects */
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* On hover, make the thumb even lighter and slightly more pronounced */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a598e, #7170ab); /* Lighter gradient on hover */
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.7); /* Slightly stronger shadow for a 'lift' effect */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Prefer 'thin' for a less intrusive, sleeker scrollbar */
+  /* Define the thumb and track colors. Gradients aren't directly supported here. */
+  scrollbar-color: #5a598e #11101d; /* thumb color (lighter) | track color (dark) */
+}
+
+/* For Microsoft Edge (Older/Experimental properties - most modern Edge versions use Webkit styles) */
+/* These are included for very broad compatibility, but often not necessary now. */
+/*
+body {
+  scrollbar-face-color: #5a598e;
+  scrollbar-track-color: #11101d;
+}
+*/

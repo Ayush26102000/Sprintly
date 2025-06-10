@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Projects\Commands\" />
-    <Folder Include="Features\Projects\Queries\" />
-    <Folder Include="Services\" />
+    <Compile Remove="Features\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Features\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Features\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
   </ItemGroup>
 
   <ItemGroup>

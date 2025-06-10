@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProjectPilot.Infrastructure.Persistence;
+using Sprintly.Application.DTOs;
 using Sprintly.Application.DTOs.Projects;
 using Sprintly.Application.Interfaces;
 
@@ -93,5 +94,30 @@ namespace Sprintly.Infrastructure.Services
             _logger.LogInformation("Project deleted: {@Project}", project);
             return true;
         }
+
+        public async Task<ProjectReportDto?> GetProjectReportAsync(Guid projectId)
+        {
+            var project = await _context.Projects
+                .Include(p => p.Tasks)
+                .FirstOrDefaultAsync(p => p.Id == projectId);
+
+            if (project == null) return null;
+
+            var report = new ProjectReportDto
+            {
+                ProjectId = project.Id,
+                ProjectName = project.Name,
+                TotalTasks = project.Tasks.Count,
+                TodoTasks = project.Tasks.Count(t => t.Status == TaskStatus.ToDo),
+                InProgressTasks = project.Tasks.Count(t => t.Status == TaskStatus.InProgress),
+                DoneTasks = project.Tasks.Count(t => t.Status == TaskStatus.Done),
+                TasksByPriority = project.Tasks
+                    .GroupBy(t => t.Priority.ToString())
+                    .ToDictionary(g => g.Key, g => g.Count())
+            };
+
+            return report;
+        }
+
     }
 }
