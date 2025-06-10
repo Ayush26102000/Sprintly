@@ -158,5 +158,37 @@ namespace Sprintly.Infrastructure.Services
         }
 
 
+        public async Task<List<TaskItem>> GetTasksByProjectIdAsync(Guid projectId)
+        {
+            return await _context.Tasks
+                .Where(t => t.ProjectId == projectId)
+                .Select(t => new TaskItem
+                {
+                    Id = t.Id,
+                    ProjectId = t.ProjectId,
+                    Title = t.Title,
+                    Description = t.Description,
+                    Status = t.Status
+                })
+                .ToListAsync();
+        }
+
+        public async Task<TaskItem?> UpdateTaskStatusAsync(Guid taskId, TaskStatus newStatus)
+        {
+            var task = await _context.Tasks.FindAsync(taskId);
+            if (task == null) return null;
+
+            task.Status = newStatus;
+            await _context.SaveChangesAsync();
+
+            return new TaskItem
+            {
+                Id = task.Id,
+                ProjectId = task.ProjectId,
+                Title = task.Title,
+                Description = task.Description,
+                Status = task.Status
+            };
+        }
     }
 }

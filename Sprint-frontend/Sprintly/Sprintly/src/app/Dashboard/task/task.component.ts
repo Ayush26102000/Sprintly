@@ -49,6 +49,7 @@ export interface Project {
 export class TaskComponent implements OnInit {
   tasks: Task[] = [];
   formData: Task = {
+    id:'',
     title: '',
     description: '',
     priority: 'Low',
@@ -133,6 +134,7 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
       this.modalTitle = 'Add Task';
       this.editingIndex = null;
       this.formData = {
+        id:'',
         title: '',
         description: '',
         priority: 'Low',
@@ -148,6 +150,7 @@ priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
     this.isModalOpen = false;
     this.editingIndex = null;
     this.formData = {
+      id:'',
       title: '',
       description: '',
       priority: 'Low',

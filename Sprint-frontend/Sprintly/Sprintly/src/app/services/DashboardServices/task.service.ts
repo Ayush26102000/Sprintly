@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Task {
-  id?: string;
+  id: string;
   title: string;
   description: string;
   priority: string;
@@ -19,6 +19,12 @@ export interface Project {
   description: string;
   tenantId: string;
   tenantName: string;
+}
+
+export enum TaskStatus {
+  ToDo = 0,
+  InProgress = 1,
+  Done = 2
 }
 
 
@@ -41,6 +47,14 @@ export class TaskService {
 
   createTask(task: Task): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, task);
+  }
+
+    getTasksByProject(projectId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiPUrl}/project/${projectId}`);
+  }
+
+  updateTaskStatus(taskId: string, newStatus: TaskStatus): Observable<Task> {
+    return this.http.patch<Task>(`${this.apiPUrl}/${taskId}/status`, newStatus);
   }
 
   updateTask(id: string, task: Task): Observable<any> {

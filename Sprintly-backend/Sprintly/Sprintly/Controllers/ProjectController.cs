@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sprintly.Application.DTOs.Projects;
 using Sprintly.Application.Interfaces;
+using Sprintly.Infrastructure.Services;
 
 namespace ProjectPilot.API.Controllers
 {
@@ -24,7 +25,7 @@ namespace ProjectPilot.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
-            {
+        {
             var projects = await _service.GetAllProjectsAsync();
             return Ok(projects);
         }
@@ -60,7 +61,7 @@ namespace ProjectPilot.API.Controllers
             if (report == null) return NotFound();
             return Ok(report);
         }
-        
+
         [HttpGet("{id}/GetUserReport")]
         public async Task<IActionResult> GetUserReport(Guid id)
         {
@@ -69,5 +70,23 @@ namespace ProjectPilot.API.Controllers
             return Ok(report);
         }
 
+
+
+
+
+        [HttpGet("project/{projectId}")]
+        public async Task<ActionResult<List<TaskItem>>> GetTasksByProjectId(Guid projectId)
+        {
+            var tasks = await _service.GetTasksByProjectIdAsync(projectId);
+            return Ok(tasks);
+        }
+
+        [HttpPatch("{taskId}/status")]
+        public async Task<ActionResult<TaskItem>> UpdateTaskStatus(Guid taskId, [FromBody] TaskStatus newStatus)
+        {
+            var updated = await _service.UpdateTaskStatusAsync(taskId, newStatus);
+            if (updated == null) return NotFound();
+            return Ok(updated);
+        }
     }
 }

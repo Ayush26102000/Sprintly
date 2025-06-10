@@ -10,6 +10,7 @@ import { ReportsComponent } from './Dashboard/reports/reports.component';
 import { ProjectsComponent } from './Dashboard/projects/projects.component';
 import { CompanyComponent } from './Dashboard/company/company.component';
 import { UserReportComponent } from './Dashboard/user-report/user-report.component';
+import { KanbanBoardComponent } from './Dashboard/kanban-board/kanban-board.component';
 
 export const routes: Routes = [
 
@@ -25,5 +26,7 @@ export const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'userreport', component: UserReportComponent },
+  { path: 'kanban', component: KanbanBoardComponent },
+
   { path: '**', redirectTo: 'login' }
 ];

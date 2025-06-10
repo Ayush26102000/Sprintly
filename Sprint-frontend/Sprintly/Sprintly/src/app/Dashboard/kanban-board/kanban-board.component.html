@@ -1,0 +1,42 @@
+
+<p-toast></p-toast>
+
+<div class="main-layout" [class.sidebar-active]="isSidebarActive">
+  <app-sidebar (toggleSidebar)="isSidebarActive = $event"></app-sidebar>
+
+  <div class="dashboard-content"  (click)="closeSidebarOnBodyClick()">
+    <app-header ></app-header>
+
+    <div class="page-body">
+ 
+<div class="kanban-board">
+  <div class="kanban-column" *ngFor="let col of columns">
+    <h3>{{ col.header }}</h3>
+
+    <div
+      class="droppable-area"
+      (drop)="onDrop($event, col.status)"
+      (dragover)="allowDrop($event)"
+    >
+      <div
+        class="task-card"
+        *ngFor="let task of col.tasks"
+        draggable="true"
+        (dragstart)="onDragStart($event, task)"
+      >
+        <div class="task-title">{{ task.title }}</div>
+        <div class="task-desc">{{ task.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
